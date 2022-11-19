@@ -1,0 +1,57 @@
+[[package]]
+name = "deprecated"
+version = "1.2.13"
+description = "Python @deprecated decorator to deprecate old python classes, functions or methods."
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+
+[package.dependencies]
+wrapt = ">=1.10,<2"
+
+[package.extras]
+dev = ["tox", "bump2version (<1)", "sphinx (<2)", "importlib-metadata (<3)", "importlib-resources (<4)", "configparser (<5)", "sphinxcontrib-websupport (<2)", "zipp (<2)", "PyTest (<5)", "PyTest-Cov (<2.6)", "pytest", "pytest-cov"]
+
+[[package]]
+name = "jaconv"
+version = "0.3"
+description = "Pure-Python Japanese character interconverter for Hiragana, Katakana, Hankaku, Zenkaku and more"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "pykakasi"
+version = "2.2.1"
+description = "Kana kanji simple inversion library"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+deprecated = "*"
+jaconv = "*"
+
+[package.extras]
+check = ["mypy (==0.770)", "mypy-extensions (==0.4.3)", "docutils", "check-manifest", "flake8", "flake8-black", "flake8-deprecated", "readme-renderer", "pygments", "isort", "twine"]
+docs = ["sphinx (>=1.8)", "sphinx-intl", "sphinx-py3doc-enhanced-theme", "sphinx-rtd-theme"]
+test = ["pytest", "pytest-benchmark", "pytest-pep8", "pytest-cov", "pytest-profiling", "coverage[toml] (>=5.2)", "py-cpuinfo"]
+
+[[package]]
+name = "wrapt"
+version = "1.14.1"
+description = "Module for decorators, wrappers and monkey patching."
+category = "main"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.9"
+content-hash = "fc7bb9cb05e3ef31b46ba0efa2ebe6663d3fcb973bff7466b3f6850fa20da636"
+
+[metadata.files]
+deprecated = []
+jaconv = []
+pykakasi = []
+wrapt = []
