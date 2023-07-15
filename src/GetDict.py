@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
-import urllib.request
 import argparse
+import os
+import urllib.request
+from dataclasses import dataclass
 
 FULL_DICT_URL = "ftp://ftp.edrdg.org/pub/Nihongo//JMdict.gz"
 EN_DICT_URL = "ftp://ftp.edrdg.org/pub/Nihongo//JMdict_e.gz"
 
 
-def get_args():
-    parser = argparse.ArgumentParser()
+@dataclass
+class CliArgs:
+    full: bool
+    english: bool
+
+
+def get_args() -> CliArgs:
+    parser = argparse.ArgumentParser(
+        prog=os.path.basename(__file__).removesuffix(".py")
+    )
     parser.add_argument(
         "-f",
         "--full",
@@ -22,7 +32,7 @@ def get_args():
         action="store_true",
         default=False,
     )
-    return parser.parse_args()
+    return CliArgs(**vars(parser.parse_args()))
 
 
 def download_file(file_url: str):

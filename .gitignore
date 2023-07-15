@@ -1,3 +1,4 @@
 *JMdict*
-!Add2JMdict.py
+!src/Add2JMdict.py
 *__pycache__*
+dist/

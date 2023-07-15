@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 import argparse
+import os
+from dataclasses import dataclass
+
 import pykakasi
 
 kks = pykakasi.kakasi()
@@ -7,8 +10,16 @@ kks = pykakasi.kakasi()
 HIRAGANA_RANGE = range(0x3041, ((0x3096) + 1))
 
 
-def get_args():
-    parser = argparse.ArgumentParser()
+@dataclass
+class CLiArgs:
+    input: str
+    output: str
+
+
+def get_args() -> CLiArgs:
+    parser = argparse.ArgumentParser(
+        prog=os.path.basename(__file__).removesuffix(".py")
+    )
     parser.add_argument(
         "-i", "--input", help="JMdict input file (JMdict_e)", required=True
     )
@@ -17,7 +28,7 @@ def get_args():
         "--output",
         help="Output file, will use input + _r if none is provided (JMdict_e -> JMdict_e_r)",
     )
-    return parser.parse_args()
+    return CLiArgs(**vars(parser.parse_args()))
 
 
 def is_hiragana(text: str) -> bool:
@@ -31,7 +42,7 @@ def get_romaji(hiragana: str) -> str:
     return text
 
 
-def get_formated_romaji(hiragana: str) -> list:
+def get_formatted_romaji(hiragana: str) -> list:
     text = ["<r_ele>\n", "<reb>{}</reb>\n".format(get_romaji(hiragana)), "</r_ele>\n"]
     return text
 
@@ -49,7 +60,7 @@ def run():
                 if end_of_reb_ele:
                     try:
                         if is_hiragana(reb):
-                            romaji_text = get_formated_romaji(reb)
+                            romaji_text = get_formatted_romaji(reb)
                             out_file.writelines(romaji_text)
                     except Exception:
                         pass
